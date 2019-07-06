@@ -1,0 +1,25 @@
+The kubectl command line tool is an extremely extensive and powerful utility. 
+It has many uses, but for this hands-on lab, we will be using it to familiarize ourselves with the Kubernetes cluster in order to find out more information about how the cluster is built. 
+After completing this lab, we will have a hands-on understanding of how to move about the cluster and check on the different resources and components of the Kubernetes cluster.
+
+1. Use the following command to list the nodes in your cluster:
+kubectl get nodes
+
+2. Use the following command to list the pods in all namespaces:
+kubectl get pods --all-namespaces
+
+3. Use the following command to list all the namespaces in the cluster:
+kubectl get namespaces
+
+4. Use the following command to list the pods in the default namespace:
+kubectl get pods
+
+5. Use the following command to find the IP address of the API server:
+kubectl get pods --all-namespaces -o wide
+
+6. Use the following command to check for any deployments in the cluster:
+kubectl get deployments --all-namespaces
+
+7. Use the following command to view the label on the etcd pod:
+kubectl get pods --all-namespaces --show-labels -o wide
+
