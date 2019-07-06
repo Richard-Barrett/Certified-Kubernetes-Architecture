@@ -1,0 +1,62 @@
+Kubernetes services allow you to dynamically access a group of replica pods without having to keep track of which pods are moved, changed, or deleted. 
+In this lesson, we will go through how to create a service and communicate from one pod to another.
+The YAML to create the service and associate it with the label selector:
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: nginx-nodeport
+spec:
+  type: NodePort
+  ports:
+  - protocol: TCP
+    port: 80
+    targetPort: 80
+    nodePort: 30080
+  selector:
+    app: nginx
+    
+To create the busybox pod to run commands from:
+
+cat << EOF | kubectl create -f -
+apiVersion: v1
+kind: Pod
+metadata:
+  name: busybox
+spec:
+  containers:
+  - name: busybox
+    image: radial/busyboxplus:curl
+    args:
+    - sleep
+    - "1000"
+EOF
+
+Services allow you to actively reach replicated pods.
+
+Commands that were used in the video:
+=====================================
+
+kubectl get services
+kubectl get services nginx-nodereport
+curl localhost:30080
+
+Kubeproxy runs on each worker node and it load balances application components running on the worker nodes. 
+Services themselves have a VIP associated with the respective services. 
+The API Server notifies kube-proxy that the new server has been created. 
+The kube-proxy is responsible for IPtables Rules.
+This allows for inter-communication between pods.
+
+To Go into a Container with Kubectl:
+====================================
+
+kubectl exec <pod_name>
+
+**To execute commands within the pod**
+
+kubectl exec <pod_name> -- <command>
+
+Example:
+=========
+kubectl exec busybox -- curl 10.101.192.32:80
+
