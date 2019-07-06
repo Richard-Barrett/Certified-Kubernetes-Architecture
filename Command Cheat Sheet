@@ -296,4 +296,6 @@ kubectl get endpoints
 6. Look at the iptables rules for your services:
 sudo iptables-save | grep KUBE | grep nginx
 
+Helpful Links
+https://kubernetes.io/docs/concepts/services-networking/service/
 
