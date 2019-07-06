@@ -149,3 +149,8 @@ sudo systemctl restart kubelet.service
 
 16. Watch the nodes as they change version:
 kubectl get nodes -w
+
+Helpful Links
+=============
+https://kubernetes.io/docs/reference/setup-tools/kubeadm/kubeadm-upgrade/
+https://github.com/kubernetes/kubernetes/blob/master/CHANGELOG-1.13.md
