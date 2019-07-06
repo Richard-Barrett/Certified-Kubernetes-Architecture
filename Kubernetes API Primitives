@@ -1,0 +1,52 @@
+API Primitives:
+
+Intercluster Communication occurs with the API server.
+The API server is the only component that communicates with the etcd Data Store. 
+Kubectl command line tool interacts with the API Server to create, delete, describe, and check on resources throughout the clsuter.
+
+To Get Status on Components in the cluster:
+===========================================
+kubectl get componentstatus
+
+This will show you the status of the components throughout the cluster.
+All components and/or pods are persitent entities. 
+You can provide this information in a .yaml.
+TWO SPACES FOR INDENTATION:
+
+EXAMPLE:
+=========
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: nginx-deployment
+spec:
+  selector:
+    matchLabels:
+      app: nginx
+  replicas: 2
+  template:
+    metadata:
+      labels:
+        app: nginx
+    spec:
+      containers:
+      - name: nginx
+        image: nginx:1.7.9
+        ports:
+        - containerPort: 80
+        
+You store the states of the pods and/or components in .yaml files. 
+Kubectl converts the .yaml file into JSON.
+You can use the following to make a deploymemt YAML script
+
+kubectl create -f nginx.yaml
+
+You can get information on the pod by running the following command.
+kubectl get deployment nginx-deployment -o yaml
+
+There can only one pod with one unique id UID.
+If a pod is deleted you can create a new pod with kubctl and you will get a new UID.
+
+Specs describe the desired state the pod should be persistent.
+Specs help with versioning within the ci/cd pipelines. 
+
