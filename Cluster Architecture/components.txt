@@ -1,0 +1,27 @@
+Cluster Architecture:
+
+Kubernetes Master:
+===================
+The kubernetes Mater is made up of 4 main services that help maintain the control plane
+* API Server - This is the communication hub for all cluster components. It exposes the kubernetes API.
+* Scheduler - Assigns your application to a worker node. It auto-detects which pod to assign to which node based on resource-requirements and hardware constraints.
+* Controller Manager - Maintains the cluster. Handles node failures, replicating components, and maintains the correct number of pods.
+* etcd - Data store that stores the cluster configuration
+
+NOTE** Master node can be replicated for high availability.
+
+Kubernetes Worker:
+==================
+The worker node has three main components
+* Kublet - Runs and manages the containers on the node and talks to the API Server
+* Kube-proxy - Load balances traffice between application components.
+* Container Runtime - The program that runs your containers
+
+Commands Used in Video:
+=======================
+kubectl get nodes
+kubectl get pods --all-namespaces
+kubectl get pods --all-namespaces -o wide
+kubectl get namespaces
+kubectl describe pod nginx
+kubectl delete pod nginx
