@@ -97,3 +97,55 @@ kubectl describe pods
 Helpful Links:
 https://github.com/kubernetes/community/blob/master/contributors/devel/sig-testing/e2e-tests.md
 https://kubernetes.io/docs/getting-started-guides/ubuntu/
+
+#Upgrading the Kubernetes Cluster
+kubeadm allows us to upgrade our cluster components in the proper order, making sure to include important feature upgrades we might want to take advantage of in the latest stable version of Kubernertes. 
+In this lesson, we will go through upgrading our cluster from version 1.13.5 to 1.14.1.
+
+1. View the version of the server and client on the master node:
+kubectl version --short
+
+2. View the version of the scheduler and controller manager:
+kubectl get pods -n kube-system kube-controller-manager-chadcrowell1c.mylabserver.com -o yaml
+
+3. View the name of the kube-controller pod:
+kubectl get pods -n kube-system
+
+4. Set the VERSION variable to the latest stable release of Kubernetes:
+export VERSION=v1.14.1
+
+5. Set the ARCH variable to the amd64 system:
+export ARCH=amd64
+
+6. View the latest stable version of Kubernetes using the variable:
+echo $VERSION
+
+7. Curl the latest stable version of Kubernetes:
+curl -sSL https://dl.k8s.io/release/${VERSION}/bin/linux/${ARCH}/kubeadm > kubeadm
+
+8. Install the latest version of kubeadm:
+sudo install -o root -g root -m 0755 ./kubeadm /usr/bin/kubeadm
+
+9. Check the version of kubeadm:
+sudo kubeadm version
+
+10. Plan the upgrade:
+sudo kubeadm upgrade plan
+
+11. Apply the upgrade to 1.14.1:
+kubeadm upgrade apply v1.14.1
+
+12. View the differences between the old and new manifests:
+diff kube-controller-manager.yaml /etc/kubernetes/manifests/kube-controller-manager.yaml
+
+13. Curl the latest version of kubelet:
+curl -sSL https://dl.k8s.io/release/${VERSION}/bin/linux/${ARCH}/kubelet > kubelet
+
+14. Install the latest version of kubelet:
+sudo install -o root -g root -m 0755 ./kubelet /usr/bin/kubelet
+
+15. Restart the kubelet service:
+sudo systemctl restart kubelet.service
+
+16. Watch the nodes as they change version:
+kubectl get nodes -w
