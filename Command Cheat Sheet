@@ -182,3 +182,6 @@ sudo kubeadm token list
 
 8. Print the kubeadm join command to join a node to the cluster:
 sudo kubeadm token create [token_name] --ttl 2h --print-join-command
+
+Helpful Links
+https://kubernetes.io/docs/tasks/administer-cluster/cluster-management/#maintenance-on-a-node
