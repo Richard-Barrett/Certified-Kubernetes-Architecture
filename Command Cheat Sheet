@@ -1,0 +1,11 @@
+1. View the pods in the default namespace with a custom view:
+kubectl get pods -o custom-columns=POD:metadata.name,NODE:spec.nodeName --sort-by spec.nodeName -n kube-system
+
+2. View the kube-scheduler YAML:
+kubectl get endpoints kube-scheduler -n kube-system -o yaml
+
+3.Create a stacked etcd topology using kubeadm:
+kubeadm init --config=kubeadm-config.yaml
+
+4. Watch as pods are created in the default namespace:
+kubectl get pods -n kube-system -w
