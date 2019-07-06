@@ -246,3 +246,16 @@ nsenter -t [container_pid] -n ip addr
 
 Helpful Links
 https://kubernetes.io/docs/concepts/cluster-administration/networking/
+
+# Container Network Interface (CNI)
+A Container Network Interface (CNI) is an easy way to ease communication between containers in a cluster. 
+The CNI has many responsibilities, including IP management, encapsulating packets, and mappings in userspace. 
+In this lesson, we will cover the details of the Flannel CNI we used in our Linux Academy cluster and talk about the ways in which we simplified communication in our cluster.
+
+1. Apply the Flannel CNI plugin:
+kubectl apply -f https://raw.githubusercontent.com/coreos/flannel/bc79dd1505b0c8681ece4de4c0d86c5cd2643275/Documentation/kube-flannel.yml
+
+Helpful Links
+https://github.com/coreos/flannel/blob/master/Documentation/kubernetes.md
+https://kubernetes.io/docs/setup/independent/create-cluster-kubeadm/#pod-network
+https://kubernetes.io/docs/concepts/cluster-administration/addons/
